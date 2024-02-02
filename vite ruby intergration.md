@@ -1,4 +1,4 @@
-# Intergration with Vite and Ruby on rails
+# Intergration with Vite and Ruby on Rails
 
 ## Table of contents
 
