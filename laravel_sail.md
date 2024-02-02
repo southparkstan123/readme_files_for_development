@@ -52,17 +52,17 @@ and install sail to your laravel project
 php artisan sail:install
 ```
 
-3. Run ```docker-compose.yml``` which was created to the root directory of the project.
+After that, ```docker-compose.yml``` was created to the root directory of the project.
 
-4. Modify your ```.env``` file with environment variables as the application needs.
+3. Modify your ```.env``` file with environment variables as the application needs.
 
-5. Build the docker image by following command:
+4. Build the docker image by following command:
 
 ```bash
 ./vendor/bin/sail up -d
 ```
 
-6. Access ```http://locahost``` on browser, you will see the application is running.
+5. Access ```http://locahost``` on browser, you will see the application is running.
 
 ## (Optional) Add alias for Laravel sail via Bash profile or Z shell
 
