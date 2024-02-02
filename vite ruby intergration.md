@@ -17,7 +17,7 @@
 
 1. Create the new app by ```rails new <APP_NAME> -d <DATABASE_TYPE>```
 
-2. Add the ```gem "vite_rails"``` and ```gem "vite_rails"``` to the ```Gemfile```. Of course you can more packages add on it.
+2. Add the ```gem "vite_rails"``` and ```gem "vite_rails"``` to the ```Gemfile```. Of course you can add more packages as desired.
 
 Example:
 ```ruby
