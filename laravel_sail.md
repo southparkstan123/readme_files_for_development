@@ -112,8 +112,9 @@ sail yarn run build
 
 1. Install package
 ```bash
-sail composer require jenssegers/mongodb
+sail composer require mongodb/laravel-mongodb
 ```
+
 2. Add dependence for MongoDB service on ```docker-compose.yml```
 
 ```yml
@@ -156,7 +157,7 @@ volumes:
 ```php
 'mongodb' => [ 
     'driver' => 'mongodb', 
-    'host' => env('MONGO_DB_HOST', '127.0.0.1'), 
+    'host' => env('MONGO_DB_HOST', 'mongo'), 
     'port' => env('MONGO_DB_PORT', '27017'), 
     'database' => env('MONGO_DB_DATABASE') , 
     'username' => env('MONGO_DB_USERNAME'), 
@@ -179,9 +180,46 @@ MONGO_DB_USERNAME = <YOUR_DATABASE_USERNAME>
 MONGO_DB_PASSWORD = <YOUR_DATABASE_PASSWORD>
 ```
 
-7. Rebuild by ```sail up -d```
+7. Run ```sail root-shell``` to arbitrary shell commands within the container. Then, run ```pecl install mongodb``` to install mongodb binary in the container.
 
-sail 
+8. Run ```echo "extension=mongodb.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` ``` to Add extension to ```php.ini```, then ```exit``` to exit the shell.
+
+9. Run ```sail artisan sail:publish``` to generate a new folder ```docker``` will be created named docker. 
+
+Inside the folder ```docker```, the folders named with version numbers that corresponds to your PHP version that you are using in your container.
+
+10.  If you are using PHP 8.1, choose the folder ```8.1``` and open the ```Dockerfile``` add the mongodb php extension inside as follow:
+
+```
+# ...
+&& apt-get install -y php8.1-cli php8.1-dev \
+    php8.1-pgsql php8.1-sqlite3 php8.1-gd php8.1-imagick \
+    php8.1-curl \
+    php8.1-imap php8.1-mysql php8.1-mbstring \
+    php8.1-xml php8.1-zip php8.1-bcmath php8.1-soap \
+    php8.1-intl php8.1-readline \
+    php8.1-ldap \
+    php8.1-msgpack php8.1-igbinary php8.1-redis php8.1-swoole \
+    php8.1-memcached php8.1-pcov php8.1-xdebug \
+    php8.1-mongodb \ # <- Add this
+# ...
+```
+
+11. Run the following commands build our container again
+
+```bash
+#Stop sail
+sail stop
+
+#Rebuild container
+sail build
+
+#Start sail
+sail sail up -d
+
+#Install the mongodb package
+sail composer require mongodb/laravel-mongodb
+```
 
 ## (Optional) Add Redis service to Laravel sail
 
