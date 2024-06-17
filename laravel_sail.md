@@ -262,3 +262,27 @@ volumes:
 4. Rebuild by ```sail up -d```
 
 Happy Coding!!!!!
+
+## (Optional) Changing the php version in Laravel sail
+
+1. Run `sail php -v` to verify the version of php which have been used.
+
+2. Run `sail down` to stop sail.
+
+3. Modify the version of php as you desired in `docker-compose.yml` file by following place:
+
+```yml
+services:
+    laravel.test:
+        build:
+            context: ./docker/<VERSION_OF_PHP>
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-<VERSION_OF_PHP>/app
+        extra_hosts:
+```
+
+4. Run `sail build --no-cache` to rebuild the container images.
+
+5. Run `sail up` to restart sail and verify the changed version of php by `sail php -v`.
