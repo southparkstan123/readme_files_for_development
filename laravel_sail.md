@@ -90,7 +90,7 @@ then save and quit.
 
 2. Run ```source ~/.zshrc```
 
-### Start up the project
+## Start up the project
 
 1. Run ```sail up``` to start up the project
 
